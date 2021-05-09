@@ -1,9 +1,9 @@
-from .data import Data
-from .parenthesis import Parenthesis
-from .package import Package
-from .simulator import Simulator
-from .variable import Variable
-from .operation import Operation
+from data import Data
+from parenthesis import Parenthesis
+from package import Package
+from simulator import Simulator
+from variable import Variable
+from operation import Operation
 
 
 class Function:

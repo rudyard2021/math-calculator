@@ -1,5 +1,5 @@
-from .package import Package
-from .data import Data
+from package import Package
+from data import Data
 
 
 class Simulator:

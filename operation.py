@@ -1,6 +1,7 @@
 import math
-from .data import Data
 from decimal import Decimal
+
+from data import Data
 
 
 class Operation:
