@@ -1,1 +1,1 @@
-from function import Function
+from calculator.function import Function
