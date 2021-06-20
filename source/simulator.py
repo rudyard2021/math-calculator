@@ -32,7 +32,7 @@ class Simulator:
             self.process.append(operator_index)
             type_package = self.__get_type(operator_index)
 
-            if type_package in [Package.FACTORIAL, Package.PORCENTAGE]:
+            if type_package in [Package.FACTORIAL, Package.PERCENTAGE]:
                 self.__delete(operator_index, [0])
                 self.__index_again(operators_indexes, index, 1)
 
@@ -80,7 +80,7 @@ class Simulator:
 
     def __get_operators_indexes(self, package: list) -> list:
         indexes = self.__get_indexes(
-            [Data.FACTORIAL, Data.PORCENTAGE], package)
+            [Data.FACTORIAL, Data.PERCENTAGE], package)
 
         temp = self.__get_indexes_back([Data.POWER], package)
         indexes.extend(temp)

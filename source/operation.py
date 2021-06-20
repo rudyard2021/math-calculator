@@ -10,7 +10,7 @@ class Operation:
         self.package = package
         self.types = types
 
-    def factorial_porcentage(self, index):
+    def factorial_percentage(self, index):
         item = self.package[index]
         value = self.package[index - 1]
 

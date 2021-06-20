@@ -14,7 +14,7 @@ class Data:
     DIVISION = "/"
     POWER = "^"
     FACTORIAL = "!"
-    PORCENTAGE = "%"
+    PERCENTAGE = "%"
     SEMICOLON = ";"
     TRIGONOMETRY = [
         "sin", "cos", "tan", "ctg", "sec", "csc",
@@ -160,7 +160,7 @@ class Data:
         # self.rule.number = False
         self.__is_concluded = True
 
-    def to_porcentage(self):
+    def to_percentage(self):
         # Establecer reglas
         self.rule.to_assign(True)
         # self.rule.number = False
@@ -219,7 +219,7 @@ class Data:
         self.rule.division = False
         self.rule.power = False
         self.rule.factorial = False
-        self.rule.porcentage = False
+        self.rule.percentage = False
         self.__is_concluded = False
 
     def to_parenthesis_closed(self):
@@ -235,7 +235,7 @@ class Data:
         self.rule.division = False
         self.rule.power = False
         self.rule.factorial = False
-        self.rule.porcentage = False
+        self.rule.percentage = False
         self.rule.semicolon = False
         self.__is_concluded = False
 

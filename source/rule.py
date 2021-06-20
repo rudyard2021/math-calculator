@@ -11,7 +11,7 @@ class Rule:
         self.division = False
         self.power = False
         self.factorial = False
-        self.porcentage = False
+        self.percentage = False
         self.semicolon = False
         self.trigonometry = True
         self.logarithm_natural = True
@@ -33,7 +33,7 @@ class Rule:
         self.division = value
         self.power = value
         self.factorial = value
-        self.porcentage = value
+        self.percentage = value
         self.trigonometry = value
         self.logarithm_natural = value
         self.logarithm = value

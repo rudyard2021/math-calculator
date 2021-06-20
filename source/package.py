@@ -7,7 +7,7 @@ class Package:
     NUMBER = "number"
     OPERATOR = "operator"
     FACTORIAL = "factorial"
-    PORCENTAGE = "porcentage"
+    PERCENTAGE = "percentage"
     FUNCTION = "function"
     SEMICOLON = "semicolon"
     OPENED = "opened"
@@ -34,9 +34,9 @@ class Package:
         self.__function.append(value)
         self.__types.append(Package.FACTORIAL)
 
-    def add_porcentage(self, value):
+    def add_percentage(self, value):
         self.__function.append(value)
-        self.__types.append(Package.PORCENTAGE)
+        self.__types.append(Package.PERCENTAGE)
 
     def add_function(self, value):
         self.__function.append(value)
@@ -104,7 +104,7 @@ class Package:
                 self.__function.insert(index + 1, "0")
                 self.__types.insert(index + 1, Package.NUMBER)
 
-                if next_next_type in [Package.FACTORIAL, Package.PORCENTAGE]:
+                if next_next_type in [Package.FACTORIAL, Package.PERCENTAGE]:
                     self.__function.insert(index + 5, Data.PARENTHESIS_CLOSED)
                     self.__types.insert(index + 5, Package.CLOSED)
                 else:
@@ -148,7 +148,7 @@ class Package:
                         Package.VARIABLE,
                         Package.NUMBER,
                         Package.FACTORIAL,
-                        Package.PORCENTAGE]:
+                        Package.PERCENTAGE]:
             self.__function.insert(index, Data.MULTIPLICATION)
             self.__types.insert(index, Package.OPERATOR)
 

@@ -11,7 +11,7 @@ class Function:
     def __init__(self):
         self.process = []
         self.types = []
-        self.message = ""
+        self.__error = None
 
     def start(self, function):
         function = self.__trim(str(function))
@@ -103,10 +103,10 @@ class Function:
                     index = index + item_length
                 else:
                     error = True
-            elif item in Data.PORCENTAGE:
-                if data.rule.porcentage:
-                    data.to_porcentage()
-                    package.add_porcentage(item)
+            elif item in Data.PERCENTAGE:
+                if data.rule.percentage:
+                    data.to_percentage()
+                    package.add_percentage(item)
                     index = index + item_length
                 else:
                     error = True
@@ -190,9 +190,9 @@ class Function:
         concluded_parenth, number = parenthesis.is_concluded()
 
         if error or not concluded_parenth or not data.is_concluded():
-            self.message = function[0:index]
+            self.__error = function[0:index]
         else:
-            self.message = None
+            self.__error = None
 
             for item in range(number):
                 package.add_closed(Data.PARENTHESIS_CLOSED)
@@ -208,12 +208,17 @@ class Function:
             self.process = process
             self.variable = Variable(package_list, package_types)
 
+        return self.__error
+
     def __trim(self, function):
         function = str.replace(function, " ", "")
         function = str.lower(function)
         return function
 
     def f(self, variables=None):
+        if self.__error is not None:
+            return None
+
         package = self.variable.set(variables)
         types = self.types.copy()
         length = len(self.process)
@@ -223,8 +228,8 @@ class Function:
             index_process = self.process[index]
             item_type = types[index_process]
 
-            if item_type in [Package.FACTORIAL, Package.PORCENTAGE]:
-                operation.factorial_porcentage(index_process)
+            if item_type in [Package.FACTORIAL, Package.PERCENTAGE]:
+                operation.factorial_percentage(index_process)
             elif item_type in [Package.VARIABLE, Package.NUMBER]:
                 operation.variable_number(index_process)
             elif item_type == Package.OPERATOR:
@@ -233,4 +238,3 @@ class Function:
                 operation.function(index_process)
 
         return package[0]
-

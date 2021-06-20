@@ -1,12 +1,12 @@
-from calculator.function import Function
+from source.function import Function
 
 
 if __name__ == "__main__":
     function = Function()
-    function.start("3pi/sin(10)-raiz(8;3)")
+    err = function.start("3pi/sin(10)-raiz(8;3)")
 
-    if function.message is not None:
-        print("Incompleto => {}".format(function.message))
+    if err is not None:
+        print("Incompleto => {}".format(err))
     else:
         print("{}".format(function.variable.package))
         value = function.f({"x": 5})
