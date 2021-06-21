@@ -118,11 +118,7 @@ class Operation:
                 value = Decimal.sqrt(value)
         elif item in Data.SUMMA:
             if has_base:
-                base = self.package[index + 4]
-                value2 = Decimal(0)
-                for x in range(1, int(base) + 1, 1):
-                    value2 += Decimal.__pow__(value, Decimal(x))
-                value = value2
+                value = self.__case_suma(value, index)
         elif item in Data.ABS:
             value = value.__abs__()
         elif item in Data.MOD:
@@ -139,6 +135,13 @@ class Operation:
             index = index_base + index
             self.package.pop(index)
             self.types.pop(index)
+
+    def __case_suma(self, value, index):
+        base = self.package[index + 4]
+        value2 = Decimal(1)
+        for x in range(1, int(base) + 1, 1):
+            value2 += Decimal.__pow__(value, Decimal(x))
+        value = value2
 
     def __case_factorial(self, value):
         if value < 0:

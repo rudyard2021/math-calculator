@@ -21,6 +21,14 @@ class Simulator:
             value = self.types[index]
         return value
 
+    def __get_index_type(self, start_index, kind):
+        if start_index >= 0 and len(self.types) > start_index:
+            for i in range(len(self.types[start_index:])):
+                if self.types[start_index + i] == kind:
+                    return i
+
+        return -1
+
     def __simulate(self) -> bool:
         start_index, end_index = self.__get_parenthesis_indexes()
         operators_indexes = self.__get_operators_indexes(
@@ -44,15 +52,12 @@ class Simulator:
 
         type_package = self.__get_type(start_index)
         type_package_old = self.__get_type(start_index - 1)
+
         if type_package_old == Package.FUNCTION:
-            type_package_next_next = self.__get_type(start_index + 2)
-            if type_package_next_next == Package.SEMICOLON:
-                self.__delete(start_index, [4, 3, 2, 0, -1])
-                self.process.append(start_index - 1)
-            else:
-                self.__delete(start_index, [2, 0, -1])
-                self.process.append(start_index - 1)
-            pass
+            indexes = self.__index_to_delete_from_function(start_index)
+            self.__delete(start_index, indexes)
+            self.process.append(start_index - 1)
+
         elif type_package == Package.OPENED:
             self.__delete(start_index, [2, 0])
             self.process.append(start_index + 1)
@@ -62,6 +67,13 @@ class Simulator:
         if len(self.package) == 1:
             next = False
         return next
+
+    def __index_to_delete_from_function(self, index_base: int):
+        to_index = self.__get_index_type(index_base, Package.CLOSED)
+        indexes = list(range(-1, to_index + 1))
+        indexes.reverse()
+        indexes = [x for x in indexes if x != 1]
+        return indexes
 
     def __delete(self, index_base: int, indexes: list):
         for index in indexes:

@@ -62,7 +62,7 @@ class Function:
                     data.to_parenthesis_opened()
                     package.add_opened(item)
                     parenthesis.open()
-                    parenthesis.type = Parenthesis.NORMAL
+                    parenthesis.input()
                     index = index + item_length
                 else:
                     error = True
@@ -137,7 +137,7 @@ class Function:
                 if data.rule.logarithm:
                     data.to_logarithm()
                     package.add_function(item)
-                    parenthesis.type = Parenthesis.NORMAL_SPECIAL
+                    parenthesis.input(1, 2)
                     index = index + item_length
                 else:
                     error = True
@@ -145,7 +145,7 @@ class Function:
                 if data.rule.root:
                     data.to_root()
                     package.add_function(item)
-                    parenthesis.type = Parenthesis.NORMAL_SPECIAL
+                    parenthesis.input(1, 2)
                     index = index + item_length
                 else:
                     error = True
@@ -153,7 +153,7 @@ class Function:
                 if data.rule.summa:
                     data.to_summa()
                     package.add_function(item)
-                    parenthesis.type = Parenthesis.NORMAL_SPECIAL
+                    parenthesis.input(1, 5)
                     index = index + item_length
                 else:
                     error = True
@@ -168,7 +168,7 @@ class Function:
                 if data.rule.mod:
                     data.to_mod()
                     package.add_function(item)
-                    parenthesis.type = Parenthesis.SPECIAL
+                    parenthesis.input(2, 2)
                     index = index + item_length
                 else:
                     error = True
