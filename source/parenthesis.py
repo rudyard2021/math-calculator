@@ -9,6 +9,7 @@ class Input:
         if self.count > self.max:
             return False
         return True
+
 class Parenthesis:
 
     def __init__(self):

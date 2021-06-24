@@ -59,7 +59,7 @@ class Variable:
                 package[index] = self.__get(variables, item)
                 pass
             pass
-        return package
+        return package, variables
 
     def __get(self, variables: dict, item: str):
         value = Decimal(0)
@@ -90,7 +90,7 @@ class Variable:
         variables = {"x":10, "a" = 1}
         variables = ["x=10","a=1"]
         """
-        package = self.__load(variables)
-        return package
+        package, var_items = self.__load(variables)
+        return package, var_items
         pass
     pass

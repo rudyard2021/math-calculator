@@ -58,6 +58,7 @@ class Simulator:
             self.__delete(start_index, indexes)
             self.process.append(start_index - 1)
 
+
         elif type_package == Package.OPENED:
             self.__delete(start_index, [2, 0])
             self.process.append(start_index + 1)

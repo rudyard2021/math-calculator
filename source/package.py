@@ -9,6 +9,7 @@ class Package:
     FACTORIAL = "factorial"
     PERCENTAGE = "percentage"
     FUNCTION = "function"
+    FUNC_SUMMA = "func_summa"
     SEMICOLON = "semicolon"
     OPENED = "opened"
     CLOSED = "closed"
@@ -42,6 +43,10 @@ class Package:
         self.__function.append(value)
         self.__types.append(Package.FUNCTION)
 
+    def add_func_summa(self, value):
+        self.__function.append(value)
+        self.__types.append(Package.FUNC_SUMMA)
+
     def add_semicolon(self, value):
         self.__function.append(value)
         self.__types.append(Package.SEMICOLON)
@@ -64,6 +69,8 @@ class Package:
             elif type_value == Package.VARIABLE:
                 self.__case_variable(index)
             elif type_value == Package.FUNCTION:
+                self.__case_function(index)
+            elif type_value == Package.FUNC_SUMMA:
                 self.__case_function(index)
             elif type_value == Package.NUMBER:
                 self.__case_number(index)
@@ -148,6 +155,7 @@ class Package:
                         Package.VARIABLE,
                         Package.NUMBER,
                         Package.FACTORIAL,
+                        Package.FUNC_SUMMA,
                         Package.PERCENTAGE]:
             self.__function.insert(index, Data.MULTIPLICATION)
             self.__types.insert(index, Package.OPERATOR)

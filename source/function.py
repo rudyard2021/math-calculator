@@ -4,7 +4,7 @@ from .package import Package
 from .simulator import Simulator
 from .variable import Variable
 from .operation import Operation
-
+from .summa import Summa
 
 class Function:
 
@@ -151,10 +151,18 @@ class Function:
                     error = True
             elif item in Data.SUMMA:
                 if data.rule.summa:
-                    data.to_summa()
-                    package.add_function(item)
-                    parenthesis.input(1, 5)
-                    index = index + item_length
+                    new_text, new_index = data.to_summa(index + item_length)
+                    if new_text == "":
+                        error = True
+                    else:
+                        summa = Summa(Function())
+                        err = summa.load(new_text)
+                        if err is None:
+                            package.add_func_summa(summa)
+                        else:
+                            new_index = index + item_length + len(err)
+                            error = True
+                    index = new_index
                 else:
                     error = True
             elif item in Data.ABS:
@@ -219,11 +227,11 @@ class Function:
         if self.__error is not None:
             return None
 
-        package = self.variable.set(variables)
+        package, var_items = self.variable.set(variables)
         types = self.types.copy()
         length = len(self.process)
 
-        operation = Operation(package, types)
+        operation = Operation(package, types, var_items)
         for index in range(length):
             index_process = self.process[index]
             item_type = types[index_process]
@@ -236,5 +244,10 @@ class Function:
                 operation.operator(index_process)
             elif item_type == Package.FUNCTION:
                 operation.function(index_process)
+            elif item_type == Package.FUNC_SUMMA:
+                operation.func_suma(index_process)
 
-        return package[0]
+        value = package[0]
+        if type(value) is Summa:
+            return value.calc(var_items)
+        return value

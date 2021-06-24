@@ -1,4 +1,5 @@
 from .rule import Rule
+from .summa import Summa
 
 
 class Data:
@@ -253,9 +254,28 @@ class Data:
         text = self.__function[index_start:index_end]
         return text, index_end
 
-    def to_summa(self):
+    def to_summa(self, index_start):
+        function = self.__function[index_start:]
+
         # Establecer reglas
-        self.rule.to_assign(False)
-        self.rule.parenthesis_opened = True
-        self.rule.semicolon = True
-        self.__is_concluded = False
+        self.rule.to_assign(True)
+        self.__is_concluded = True
+        index_end = index_start
+        length = len(function)
+
+        count_parenthesis = 0
+
+        for i in range(length):
+            item = function[i]
+            if item == Data.PARENTHESIS_OPENED:
+                count_parenthesis = count_parenthesis + 1
+            elif item == Data.PARENTHESIS_CLOSED:
+                count_parenthesis = count_parenthesis - 1
+
+            if count_parenthesis == 0:
+                break
+            index_end = index_end + 1
+
+        index_end = index_end + 1
+        text = self.__function[index_start:index_end]
+        return text, index_end

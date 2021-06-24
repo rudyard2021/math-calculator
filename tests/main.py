@@ -22,6 +22,11 @@ class TestFunction(unittest.TestCase):
         err = self.function.start("sin(pi/2)+cos(2pi)+abs(-3)*5-4!")
         self.assertEqual(self.function.f(), -7)
 
+    def test_summa(self):
+        err = self.function.start("summa(2^x;x;1;5)+root(125;3)")
+        self.assertEqual(self.function.f(), 67)
 
 if __name__ == "__main__":
     unittest.main("")
+
+# python -m unittest tests/test_something.py

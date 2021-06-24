@@ -1,18 +1,25 @@
 import math
 from decimal import Decimal
 
+from .summa import Summa
 from .data import Data
 
 
 class Operation:
 
-    def __init__(self, package: list, types: list):
+    def __init__(self, package: list, types: list, variables: dict):
         self.package = package
         self.types = types
+        self.variables = variables
+
+    def func_suma(self, index):
+        summa = self.package[index]
+        value = summa.start(self.variables)
+        self.package[index] = value
 
     def factorial_percentage(self, index):
         item = self.package[index]
-        value = self.package[index - 1]
+        value = self.__case_value(index - 1) # self.package[index - 1]
 
         if item == Data.FACTORIAL:
             value = self.__case_factorial(value)
@@ -24,8 +31,8 @@ class Operation:
 
     def operator(self, index):
         item = self.package[index]
-        valuea = self.package[index - 1]
-        valueb = self.package[index + 1]
+        valuea = self.__case_value(index - 1) # self.package[index - 1]
+        valueb = self.__case_value(index + 1) # self.package[index + 1]
 
         if item == Data.POWER:
             valuea = Decimal.__pow__(valuea, valueb)
@@ -51,7 +58,7 @@ class Operation:
 
     def function(self, index):
         item = self.package[index]
-        value = self.package[index + 2]
+        value = self.__case_value(index + 2) # self.package[index + 2]
         has_base = True if self.package[index + 3] == Data.SEMICOLON else False
 
         if item == Data.SIN:
@@ -106,23 +113,20 @@ class Operation:
             value = value.ln()
         elif item in Data.LOGARITHM:
             if has_base:
-                base = self.package[index + 4]
+                base = self.__case_value(index + 4) # self.package[index + 4]
                 value = Decimal(math.log(value, base))
             else:
                 value = Decimal.log10(value)
         elif item in Data.ROOT:
             if has_base:
-                base = self.package[index + 4]
+                base = self.__case_value(index + 4) # self.package[index + 4]
                 value = Decimal.__pow__(value, Decimal(1)/base)
             else:
                 value = Decimal.sqrt(value)
-        elif item in Data.SUMMA:
-            if has_base:
-                value = self.__case_suma(value, index)
         elif item in Data.ABS:
             value = value.__abs__()
         elif item in Data.MOD:
-            value2 = self.package[index + 4]
+            value2 = self.__case_value(index + 4) # self.package[index + 4]
             value = value.__mod__(value2)
 
         self.package[index + 2] = Decimal(value)
@@ -136,13 +140,6 @@ class Operation:
             self.package.pop(index)
             self.types.pop(index)
 
-    def __case_suma(self, value, index):
-        base = self.package[index + 4]
-        value2 = Decimal(1)
-        for x in range(1, int(base) + 1, 1):
-            value2 += Decimal.__pow__(value, Decimal(x))
-        value = value2
-
     def __case_factorial(self, value):
         if value < 0:
             return Decimal("Infinity")
@@ -150,3 +147,10 @@ class Operation:
             return Decimal(1)
         else:
             return self.__case_factorial(value - 1) * value
+
+    def __case_value(self, index):
+        value = self.package[index]
+        if type(value) is Summa:
+            return value.calc(self.variables)
+        else:
+            return value
