@@ -84,10 +84,10 @@ class Data:
         self.rule.to_assign(True)
         self.rule.plus_minus = False
         self.rule.parenthesis_closed = False
-        self.multiplication = False
-        self.division = False
-        self.power = False
-        self.factorial = False
+        self.rule.multiplication = False
+        self.rule.division = False
+        self.rule.power = False
+        self.rule.factorial = False
         self.__is_concluded = False
 
         return sign, index_end
