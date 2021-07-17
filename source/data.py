@@ -9,7 +9,7 @@ class Data:
     EULER = ["e"]
     PLUS = "+"
     MINUS = "-"
-    PARENTHESIS_OPENED = "("
+    PARENTHESIS_OPEN = "("
     PARENTHESIS_CLOSED = ")"
     MULTIPLICATION = "*"
     DIVISION = "/"
@@ -170,39 +170,39 @@ class Data:
     def to_trigonometry(self):
         # Establecer reglas
         self.rule.to_assign(False)
-        self.rule.parenthesis_opened = True
+        self.rule.parenthesis_open = True
         self.__is_concluded = False
 
     def to_logarithm(self):
         # Establecer reglas
         self.rule.to_assign(False)
-        self.rule.parenthesis_opened = True
+        self.rule.parenthesis_open = True
         self.rule.semicolon = True
         self.__is_concluded = False
 
     def to_logarithm_natural(self):
         # Establecer reglas
         self.rule.to_assign(False)
-        self.rule.parenthesis_opened = True
+        self.rule.parenthesis_open = True
         self.__is_concluded = False
 
     def to_root(self):
         # Establecer reglas
         self.rule.to_assign(False)
-        self.rule.parenthesis_opened = True
+        self.rule.parenthesis_open = True
         self.rule.semicolon = True
         self.__is_concluded = False
 
     def to_abs(self):
         # Establecer reglas
         self.rule.to_assign(False)
-        self.rule.parenthesis_opened = True
+        self.rule.parenthesis_open = True
         self.__is_concluded = False
 
     def to_mod(self):
         # Establecer reglas
         self.rule.to_assign(False)
-        self.rule.parenthesis_opened = True
+        self.rule.parenthesis_open = True
         self.rule.semicolon = True
         self.__is_concluded = False
 
@@ -212,7 +212,7 @@ class Data:
         # self.rule.number = False
         self.__is_concluded = True
 
-    def to_parenthesis_opened(self):
+    def to_parenthesis_open(self):
         # Establecer reglas
         self.rule.to_assign(True)
         self.rule.parenthesis_closed = False
@@ -267,7 +267,7 @@ class Data:
 
         for i in range(length):
             item = function[i]
-            if item == Data.PARENTHESIS_OPENED:
+            if item == Data.PARENTHESIS_OPEN:
                 count_parenthesis = count_parenthesis + 1
             elif item == Data.PARENTHESIS_CLOSED:
                 count_parenthesis = count_parenthesis - 1

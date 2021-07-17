@@ -5,7 +5,7 @@ class Rule:
         self.pi = True
         self.euler = True
         self.plus_minus = True
-        self.parenthesis_opened = True
+        self.parenthesis_open = True
         self.parenthesis_closed = False
         self.multiplication = False
         self.division = False
@@ -27,7 +27,7 @@ class Rule:
         self.pi = value
         self.euler = value
         self.plus_minus = value
-        self.parenthesis_opened = value
+        self.parenthesis_open = value
         self.parenthesis_closed = value
         self.multiplication = value
         self.division = value

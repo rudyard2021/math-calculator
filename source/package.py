@@ -11,7 +11,7 @@ class Package:
     FUNCTION = "function"
     FUNC_SUMMA = "func_summa"
     SEMICOLON = "semicolon"
-    OPENED = "opened"
+    OPEN = "open"
     CLOSED = "closed"
 
     def __init__(self):
@@ -51,9 +51,9 @@ class Package:
         self.__function.append(value)
         self.__types.append(Package.SEMICOLON)
 
-    def add_opened(self, value):
+    def add_open(self, value):
         self.__function.append(value)
-        self.__types.append(Package.OPENED)
+        self.__types.append(Package.OPEN)
 
     def add_closed(self, value):
         self.__function.append(value)
@@ -74,8 +74,8 @@ class Package:
                 self.__case_function(index)
             elif type_value == Package.NUMBER:
                 self.__case_number(index)
-            elif type_value == Package.OPENED:
-                self.__case_opened(index)
+            elif type_value == Package.OPEN:
+                self.__case_open(index)
             index = index + 1
 
         return self.__function
@@ -100,13 +100,13 @@ class Package:
         next_type = self.__get_type(index + 1)
         next_next_type = self.__get_type(index + 2)
 
-        if old_type in [None, Package.OPENED, Package.SEMICOLON]:
+        if old_type in [None, Package.OPEN, Package.SEMICOLON]:
             self.__function.insert(index, "0")
             self.__types.insert(index, Package.NUMBER)
         elif old_type in [Package.OPERATOR]:
             if next_type in [Package.NUMBER, Package.VARIABLE]:
-                self.__function.insert(index, Data.PARENTHESIS_OPENED)
-                self.__types.insert(index, Package.OPENED)
+                self.__function.insert(index, Data.PARENTHESIS_OPEN)
+                self.__types.insert(index, Package.OPEN)
 
                 self.__function.insert(index + 1, "0")
                 self.__types.insert(index + 1, Package.NUMBER)
@@ -118,8 +118,8 @@ class Package:
                     self.__function.insert(index + 4, Data.PARENTHESIS_CLOSED)
                     self.__types.insert(index + 4, Package.CLOSED)
             else:
-                self.__function.insert(index, Data.PARENTHESIS_OPENED)
-                self.__types.insert(index, Package.OPENED)
+                self.__function.insert(index, Data.PARENTHESIS_OPEN)
+                self.__types.insert(index, Package.OPEN)
                 self.__function.insert(index + 1, "0")
                 self.__types.insert(index + 1, Package.NUMBER)
 
@@ -127,7 +127,7 @@ class Package:
                 i = index + 1
                 if next_type == Package.FUNCTION:
                     i = index + 4
-                elif next_type == Package.OPENED:
+                elif next_type == Package.OPEN:
                     i = index + 3
 
                 parenthesis = 0
@@ -135,7 +135,7 @@ class Package:
                 # Ubicar el indice para insertar el parentesis
                 while i < len(self.__types):
                     current_type = self.__types[i]
-                    if current_type == Package.OPENED:
+                    if current_type == Package.OPEN:
                         parenthesis = parenthesis + 1
                     elif current_type == Package.CLOSED:
                         parenthesis = parenthesis - 1
@@ -166,5 +166,5 @@ class Package:
     def __case_number(self, index):
         self.__case_variable(index)
 
-    def __case_opened(self, index):
+    def __case_open(self, index):
         self.__case_variable(index)

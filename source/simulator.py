@@ -59,7 +59,7 @@ class Simulator:
             self.process.append(start_index - 1)
 
 
-        elif type_package == Package.OPENED:
+        elif type_package == Package.OPEN:
             self.__delete(start_index, [2, 0])
             self.process.append(start_index + 1)
             pass
@@ -141,7 +141,7 @@ class Simulator:
         return indexes
 
     def __get_parenthesis_indexes(self) -> (int, int):
-        opened_index = 0
+        open_index = 0
         closed_index = len(self.package)
 
         try:
@@ -149,10 +149,10 @@ class Simulator:
             closed_index = index + 1
             while index >= 0:
                 item = self.types[index]
-                if item == Package.OPENED:
-                    opened_index = index
+                if item == Package.OPEN:
+                    open_index = index
                     break
                 index = index - 1
         except Exception:
             pass
-        return opened_index, closed_index
+        return open_index, closed_index

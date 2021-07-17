@@ -57,10 +57,10 @@ class Function:
                     package.add_operator(item)
                 else:
                     error = True
-            elif item in Data.PARENTHESIS_OPENED:
-                if data.rule.parenthesis_opened:
-                    data.to_parenthesis_opened()
-                    package.add_opened(item)
+            elif item in Data.PARENTHESIS_OPEN:
+                if data.rule.parenthesis_open:
+                    data.to_parenthesis_open()
+                    package.add_open(item)
                     parenthesis.open()
                     parenthesis.input()
                     index = index + item_length
